@@ -1,4 +1,4 @@
-This code simulates the atmospheric entry of a meteor and models its brightness over time. Here's what it does:
+This code simulates the atmospheric entry of a meteor and models its brightness over time.
 Main Purpose
 The program calculates how a meteor's physical properties (velocity, mass, height) change as it burns up in Earth's atmosphere, and tracks the resulting light intensity to create what's called an "F-Curve" - a plot showing how bright the meteor appears over time.
 Key Physics Modeled
