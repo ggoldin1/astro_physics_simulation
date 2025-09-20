@@ -1,45 +1,114 @@
-This code simulates the atmospheric entry of a meteor and models its brightness over time.
+# Meteor Atmospheric Entry Simulation
 
-**Main Purpose**
+A Python simulation that models the physics of a meteor burning up in Earth's atmosphere and generates the characteristic light curve (F-Curve) observed by astronomers.
 
-The program calculates how a meteor's physical properties (velocity, mass, height) change as it burns up in Earth's atmosphere, and tracks the resulting light intensity to create what's called an "F-Curve" - a plot showing how bright the meteor appears over time.
-Key Physics Modeled
-Atmospheric Effects:
+## Overview
 
-Calculates atmospheric density at different altitudes using an exponential decay model
-Adjusts gravity based on distance from Earth's center
+This program simulates the atmospheric entry of a meteor by calculating how its physical properties change over time as it encounters atmospheric drag and burns up due to friction. The simulation produces a light intensity curve showing how bright the meteor appears to ground-based observers.
 
-**Meteor Dynamics:**
+## Features
 
-Deceleration: The meteor slows down due to atmospheric drag
-Mass Loss: Material burns off (ablation) as the meteor heats up from friction
-Height Loss: The meteor travels downward at an angle through the atmosphere
+- **Real-time Physics Simulation**: Models atmospheric drag, mass ablation, and gravitational effects
+- **Atmospheric Modeling**: Calculates air density variations with altitude
+- **Light Curve Generation**: Produces F-Curves used in meteor astronomy research
+- **Customizable Parameters**: Adjustable meteor properties and atmospheric conditions
 
-**Light Production:**
+## Physics Modeled
 
-Calculates light intensity based on the meteor's velocity, mass, and atmospheric density
-Converts this to apparent magnitude (astronomical brightness scale)
-Uses different luminous efficiency coefficients (tau) depending on velocity
+### Atmospheric Effects
+- Exponential atmospheric density decay with altitude
+- Gravity variation with distance from Earth's center
+- Temperature and gas constant considerations
 
-**Simulation Process**
+### Meteor Dynamics
+- **Deceleration**: Atmospheric drag reduces meteor velocity
+- **Mass Loss**: Ablation removes material as the meteor heats up
+- **Trajectory**: Angular descent through atmospheric layers
 
-The code runs a time-stepped simulation that:
+### Light Production
+- Luminous efficiency based on velocity regime
+- Atmospheric density effects on brightness
+- Apparent magnitude calculations for observers
 
-Starts with initial conditions (30 km/s velocity, 500g mass, 250km altitude)
-Each time step (0.0005 seconds):
+## Initial Parameters
 
-Updates velocity (decreases due to drag)
-Updates height (decreases as meteor descends)
-Updates mass (decreases due to ablation)
-Calculates resulting light intensity
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| Velocity | 30.0 km/s | Initial meteor speed |
+| Mass | 500.0 g | Initial meteor mass |
+| Height | 250.0 km | Starting altitude |
+| Angle | 45° | Entry angle from horizontal |
+| Density | 0.005 g/cm³ | Meteor material density |
+| Time Step | 0.0005 s | Simulation resolution |
 
+## Simulation Process
 
-Continues until the meteor either slows to <1000 m/s or burns up to <0.5g
-Stores the light intensity values over time
+1. **Initialize** meteor with starting conditions
+2. **Time-step loop** continues while meteor velocity > 1000 m/s and mass > 0.5g:
+   - Calculate atmospheric density at current height
+   - Update velocity (drag deceleration)
+   - Update height (downward trajectory)
+   - Update mass (ablation loss)
+   - Calculate light intensity
+   - Store data points
+3. **Generate** F-Curve plot showing light intensity vs. time
+4. **Output** final meteor state
 
-**Output**
+## Dependencies
 
-Prints final meteor state (velocity, mass, height, brightness)
-Creates a graph showing light intensity vs. time - the characteristic "F-Curve" that astronomers use to study meteor behavior
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+```
 
-This type of simulation is used in astronomy and planetary science to understand meteor physics and predict how meteors will appear to observers on the ground.
+## Usage
+
+Run the script directly:
+```bash
+python meteor_simulation.py
+```
+
+The program will:
+- Execute the simulation automatically
+- Print final meteor parameters
+- Display an F-Curve plot showing light intensity over time
+
+## Output
+
+### Terminal Output
+- Final velocity, mass, height, light intensity, and apparent magnitude
+- Total simulation steps completed
+
+### Graphical Output
+- **F-Curve**: Light intensity vs. time plot
+- Grid lines and axis labels for easy interpretation
+- Shows the characteristic meteor brightness pattern
+
+## Applications
+
+This simulation is useful for:
+- **Meteor astronomy research**: Understanding observed light curves
+- **Atmospheric entry studies**: Modeling spacecraft or debris reentry
+- **Educational purposes**: Demonstrating atmospheric physics
+- **Mission planning**: Predicting meteor shower observations
+
+## Scientific Accuracy
+
+The model incorporates:
+- Realistic atmospheric density profiles
+- Velocity-dependent luminous efficiency
+- Physical ablation processes
+- Gravitational field variations
+- Observer distance calculations
+
+## Limitations
+
+- Assumes spherical meteor geometry
+- Single-body fragmentation not modeled
+- Simplified atmospheric composition
+- Fixed drag coefficient throughout entry
+
+---
+
+*This simulation provides a foundation for understanding meteor physics and can be extended with additional atmospheric and fragmentation models for more complex scenarios.*
